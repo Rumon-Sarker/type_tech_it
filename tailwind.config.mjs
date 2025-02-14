@@ -15,6 +15,17 @@ export default {
         nunito: ["var(--font-nunito)", "sans-serif"],
         poppins: ["var(--font-poppins)", "sans-serif"],
       },
+      container: {
+        center: true, // Centers the container
+        padding: "1.5rem", // Default padding (adjust as needed)
+        screens: {
+          sm: "640px",
+          md: "768px",
+          lg: "1087px",
+          xl: "1280px",
+          "2xl": "1440px", // Customize your max width
+        },
+      },
     },
   },
   plugins: [],
