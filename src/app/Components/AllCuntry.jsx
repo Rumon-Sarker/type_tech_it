@@ -1,6 +1,5 @@
 "use client";
 import { React, useState } from "react";
-import { FaFilter, FaSearch, FaArrowDown, FaArrowRight } from "react-icons/fa";
 
 
 const sectionsData = [
@@ -84,40 +83,84 @@ const AllCuntry = () => {
     };
 
     return (
-        <div className="container px-24 mx-auto p-4 font-poppins  space-y-9">
+        <div className="container lg:px-24 px-1 mx-auto p-4 font-poppins  space-y-9">
             {sectionsData.map((section) => (
                 <div key={section.id} className=" p-5">
-                    <div
-
-                        className="w-full  border-[#D6D6D6] border-b  pb-3  flex justify-between items-center"
-                    >
+                    <div className="w-full border-[#D6D6D6] border-b pb-3 flex justify-between items-center">
+                        {/* Left side: Title (always visible) */}
                         <span className="text-xl font-bold">{section.title}</span>
-                        {openSection === section.id ? <div className="flex items-center gap-4 p-3 rounded-lg">
-                            <input
-                                type="text"
-                                placeholder="Search..."
-                                value={searchQuery[section.id] || ""}
-                                onChange={(e) =>
-                                    setSearchQuery({ ...searchQuery, [section.id]: e.target.value })
-                                }
-                                className="w- p-2 border rounded outline-none"
-                            />
-                            <button><img src="/icon/search.png" alt="search" /></button>
-                            <button><img src="/icon/Vector3.png" alt="Vector3" /></button>
-                            <button><img src="/icon/Vector4.png" alt="Vector4" /></button>
-                            <button className="bg-[#F3F3F3] hover:bg-[#FF5A3C] w-12 h-12 rounded" onClick={() => toggleSection(section.id)}>
-                                <img className="flex justify-center mx-auto" src="/icon/Vector.png" alt="arrow icon" />
+
+                        {/* Right side: Conditional rendering based on openSection */}
+                        {openSection === section.id ? (
+                            // When the section is open
+                            <div className="flex items-center gap-2 sm:gap-4 p-2 sm:p-3 rounded-lg">
+                                {/* Search input */}
+                                <input
+                                    type="text"
+                                    placeholder="Search..."
+                                    value={searchQuery[section.id] || ""}
+                                    onChange={(e) =>
+                                        setSearchQuery({ ...searchQuery, [section.id]: e.target.value })
+                                    }
+                                    className="w-28 p-2 border rounded outline-none"
+                                />
+                                {/* Icons */}
+                                <div className="flex gap-2 sm:gap-4">
+                                    <button>
+                                        <img
+                                            src="/icon/search.png"
+                                            alt="search"
+                                            className="w-6 h-6 hover:opacity-75 transition-opacity"
+                                        />
+                                    </button>
+                                    <button>
+                                        <img
+                                            src="/icon/Vector3.png"
+                                            alt="Vector3"
+                                            className="w-6 h-6 hover:opacity-75 transition-opacity"
+                                        />
+                                    </button>
+                                    <button>
+                                        <img
+                                            src="/icon/Vector4.png"
+                                            alt="Vector4"
+                                            className="w-6 h-6 hover:opacity-75 transition-opacity"
+                                        />
+                                    </button>
+                                </div>
+                                {/* Close button */}
+                                <button
+                                    className="bg-[#F3F3F3] hover:bg-[#FF5A3C] w-12 h-12 rounded flex items-center justify-center"
+                                    onClick={() => toggleSection(section.id)}
+                                >
+                                    <img
+                                        className="w-6 h-6"
+                                        src="/icon/Vector.png"
+                                        alt="arrow icon"
+                                    />
+                                </button>
+                            </div>
+                        ) : (
+                            // When the section is closed
+                            <button
+                                className="bg-[#FF5A3C] hover:bg-[#FF3A3C] w-12 h-12 rounded flex items-center justify-center"
+                                onClick={() => toggleSection(section.id)}
+                            >
+                                <img
+                                    className="w-6 h-6"
+                                    src="/icon/Vector2.png"
+                                    alt="arrow icon"
+                                />
                             </button>
-                        </div> : <button className="bg-[#FF5A3C] hover:bg-[#FF3A3C] w-12 h-12 rounded" onClick={() => toggleSection(section.id)}>
-                            <img className="flex justify-center mx-auto" src="/icon/Vector2.png" alt="arrow icon" />
-                        </button>}
+                        )}
                     </div>
+
 
                     {openSection === section.id && (
                         <div className="mt-4 space-y-4">
 
 
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
                                 {section.cards
                                     .filter((card) =>
                                         card.title.toLowerCase().includes((searchQuery[section.id] || "").toLowerCase())

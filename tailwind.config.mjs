@@ -19,8 +19,9 @@ export default {
         center: true, // Centers the container
         padding: "1.5rem", // Default padding (adjust as needed)
         screens: {
-          sm: "640px",
+          sm: "361px",
           md: "768px",
+          mdl: "980px",
           lg: "1087px",
           xl: "1280px",
           "2xl": "1440px", // Customize your max width
